@@ -6,9 +6,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./configs/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf
+      - ./configs/sites:/etc/nginx/sites
       - ./configs/good-practices.conf:/etc/nginx/snippets/good-practices.conf
       - /certs/:/certs/
-      - /etc/letsencrypt/live/:/certs-auto
+      - /etc/letsencrypt/live/:/certs-auto/
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     restart: always
