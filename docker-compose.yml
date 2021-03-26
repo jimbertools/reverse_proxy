@@ -13,3 +13,9 @@ services:
       - /etc/letsencrypt/live/:/certs-auto/
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     restart: always
+    networks:
+      - proxy
+networks:
+    proxy:
+        external:
+            name: reverse_proxy_default
